@@ -1,0 +1,19 @@
+{
+    "name" : "Bob",
+    "favouriteNumber" : 3,
+    "isBuilder" : true,
+    "hobbies" : ["building", "bowling"],
+    "friends" : {
+        "name" : "joey",
+        "favouriteNumber" : 3,
+        "isBuilder" : false,
+        "hobbies" : ["biking", "hiking"]
+    },
+    "friends" : {
+        "name" : "ray",
+        "favouriteNumber" : 2,
+        "isBuilder" : false,
+        "hobbies" : ["singing", "drinking"]
+    }
+
+}

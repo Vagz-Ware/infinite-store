@@ -1,0 +1,17 @@
+
+
+[
+    {
+        "name": "Big corp",
+        "numberOfEmployees" : 200000,
+        "ceo" : "Mary",
+        "rating" : 4.2
+    },
+
+    {
+        "name": "small corp",
+        "numberOfEmployees" : 1000,
+        "ceo" : null,
+        "rating" : 2.2
+    }
+]
