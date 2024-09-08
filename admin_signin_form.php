@@ -20,8 +20,8 @@
 
 
 </head>
-<body class="d-flex flex-column min-vh-100">
-
+<body>
+    
     <!-- Navbar -->
     <nav class="navbar navbar-custom py-3 sticky-top">
   <div class="container-fluid top-nav py-1">
@@ -100,7 +100,10 @@
     </div>
 </nav>
     <!-- Navbar -->
-     
+
+    
+
+    
     <section class="login-section">
     <div class="container">
         <div class="row">
@@ -115,7 +118,7 @@
                         </div>
                     </center>
                     <div class="login-form-container">
-                        <form class="mb-3" action="sign_in.php" method="POST" id="loginForm">
+                        <form class="mb-3" action="admin_sign_in.php" method="POST" id="loginForm">
                             <div class="form-group mt-3">
                                 <input type="email" class="form-control" id="email" name="email" placeholder="Email" required>
                             </div>
@@ -133,13 +136,10 @@
     </div>
 </section>
 
-    
-
-  
 
 
 <!-- Footer -->
-    <footer class="footer py-2 mt-auto">
+<footer class="footer py-2 mt-auto">
       
   
       <a href="#" class="navbar-brand mx-auto company-logo on-black-bg">Infinite</a>
@@ -149,6 +149,5 @@
       
     </footer>
 <!-- Footer -->
-
 </body>
 </html>

@@ -25,7 +25,7 @@ if (isset($_POST['Submit_login_info'])) {
         // Determine the type of user based on the email domain
         if (strpos($email, '@admin.com') !== false) {
             $query = "SELECT * FROM `admins_tb` WHERE `admin_email` = '$email'";
-            $redirectUrl = "view_admin_profile.php";
+            $redirectUrl = "admin_dashboard.php";
             $sessionVar = 'admin_name';
             $passwordField = 'admin_password';
             $fullnameField = 'admin_fullname';

@@ -99,6 +99,7 @@
     </div>
 </nav>
     <!-- Navbar -->
+
 <section class="register-section">
 
     <div class="container">

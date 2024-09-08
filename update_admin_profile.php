@@ -1,3 +1,31 @@
+<?php
+
+require 'connection.php';
+
+session_start();
+
+$name = $_SESSION['admin_name'] ?? null;
+
+
+$count = $_SESSION['cart_count'] ?? 0; // Retrieve the cart count from the session
+
+$fetch_admin_info = mysqli_query($conn, "SELECT * FROM `admins_tb` WHERE `admin_fullname` = '$name'") or die("Failed to fetch admin information");
+
+if (mysqli_num_rows($fetch_admin_info) > 0 ){
+  $admin_info_row = mysqli_fetch_assoc($fetch_admin_info);
+}
+
+
+
+if (!isset($name)){
+//  js_redirect('user_login.php');
+  echo "You are not logged in, Please login";
+ header("refresh:2; http://localhost/dashboard/infinite%20watches/user_login.php");
+  exit; // Ensure script execution stops after redirection
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,7 +48,7 @@
 
 
 </head>
-<body class="d-flex flex-column min-vh-100">
+<body>
 
     <!-- Navbar -->
     <nav class="navbar navbar-custom py-3 sticky-top">
@@ -36,7 +64,6 @@
       <i class="ri-search-line ms-3 nav-icons"></i>
       <span class="ms-2">Search</span>
       </button>
-      <a class="nostyle-link" href="admin_signin_form.php"><i class="ri-admin-line sign-up-admin-icon ms-3"></i></a>
      
       
       
@@ -68,7 +95,7 @@
           </li>
           
           <li class="nav-item">
-            <a class="nav-link ms-3 sidebar-link" aria-current="page" href="#">Logout</a>
+            <a class="nav-link ms-3 sidebar-link" aria-current="page" href="logout.php">Logout</a>
           </li>
         </ul>
         
@@ -80,7 +107,11 @@
       <!-- Add your items here -->
       <a href="#" class="nav-icons me-5"><i class="ri-user-line"></i></a>
       <a href="#" class="nav-icons me-5"><i class="ri-heart-line"></i></a>
-      <a href="#" class="nav-icons me-5"><i class="ri-shopping-cart-line"></i></a>
+      <a href="view_cart.php" class="nav-icons me-5">
+    <i class="ri-shopping-cart-line"></i>
+    <span class="cart-count"><?php echo $count; ?></span>
+</a>
+
     </div>
 
   </div>
@@ -100,46 +131,63 @@
     </div>
 </nav>
     <!-- Navbar -->
-     
-    <section class="login-section">
-    <div class="container">
-        <div class="row">
-            <div class="col">
-                <div class="login-form mt-5 mb-5 mx-5 p-5">
-                    <center>
-                        <div class="login-title">
-                            <h3>Sign in</h3>
-                            <div class="info-protected">
-                                <p>Your information is protected</p>
-                            </div>
-                        </div>
-                    </center>
-                    <div class="login-form-container">
-                        <form class="mb-3" action="sign_in.php" method="POST" id="loginForm">
-                            <div class="form-group mt-3">
-                                <input type="email" class="form-control" id="email" name="email" placeholder="Email" required>
-                            </div>
-                            <div class="form-group my-3">
-                                <input type="password" class="form-control" id="password" name="password" placeholder="Password" required minlength="8">
-                            </div>
-                            <button type="button" class="px-4 infinite-btns" name="submit_registration_info" onclick="changeToRegister()">Register</button>
-                            <button type="submit" class="px-4 infinite-btns" name="Submit_login_info">Login</button>
-                        </form>
-                    </div>
-                    <a class="forgot-password-link" href="forgot_password_form.php">Forgot Password</a>
-                </div>
+
+    <!-- Update admin section -->
+<section class="update-user-section mt-5 mb-5">  
+<div class="container">
+<div class="user-update-form-container centered px-5">
+        <h2 class="text-center mb-5 mt-5">Update the details below:</h2>
+        <form action="admin_updater_code.php" class="mb-5" autocomplete="off"  enctype="multipart/form-data" method="POST">
+            <div class="form-group mb-3 hidden">
+                <input type="hidden" class="form-control"  id="id" aria-describedby="id" name="id" value="<?php echo $row['admin_id']; ?>">
             </div>
-        </div>
+
+            <div class="form-group mt-3 mb-3 hidden">
+                    <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder ="Email">
+                </div>
+
+            <div class="form-group mt-3 mb-3">
+                <input type="text" class="form-control" id="name" readonly aria-describedby="name" name="name" value="<?php echo $row['admin_fullname']; ?>">
+            </div>
+
+            <div class="form-group mt-3 mb-3">
+                
+                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="email" readonly value="<?php echo $row['admin_email']; ?>">
+                
+            </div>
+            <div class="form-group mt-3 mb-3">
+                
+                <input type="text" class="form-control" id="address" aria-describedby="address" name="address" 
+                placeholder="Home Address"
+                value="<?php echo $row['admin_address']; ?>">
+            </div>
+            <div class="form-group mt-3 mb-3">
+                
+                <input type="text" class="form-control" id="mobile_number" aria-describedby="mobile_number" name="mobile_number" value="<?php echo $row['admin_mobile_number']; ?>">
+            </div>
+            <!-- <div class="mb-3">
+               
+                <input type="password" class="form-control" id="exampleInputPassword1" name="password" value="<?php echo $row['admin_password']; ?>">
+                
+            </div> -->
+            <div class="mb-3">
+        <label for="profile_picture" class="form-label">Upload Profile Picture</label>
+        <input type="file" class="form-control" id="profile_picture" name="profile_picture">
     </div>
+
+            <button type="submit" class="px-4 infinite-btns" name="Submit_update_info">Update</button>
+            
+            <button type="button" class="px-4 infinite-btns" onclick="changeToAdminProfile()">Back to profile</button>
+        </form>
+    </div>
+</div>
 </section>
 
-    
 
-  
-
+<!-- Update admin section -->
 
 <!-- Footer -->
-    <footer class="footer py-2 mt-auto">
+    <footer class="footer py-2 fixed-bottom">
       
   
       <a href="#" class="navbar-brand mx-auto company-logo on-black-bg">Infinite</a>

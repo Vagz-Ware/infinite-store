@@ -20,8 +20,8 @@
 
 
 </head>
-<body class="d-flex flex-column min-vh-100">
-
+<body>
+    
     <!-- Navbar -->
     <nav class="navbar navbar-custom py-3 sticky-top">
   <div class="container-fluid top-nav py-1">
@@ -36,8 +36,8 @@
       <i class="ri-search-line ms-3 nav-icons"></i>
       <span class="ms-2">Search</span>
       </button>
-      <a class="nostyle-link" href="admin_signin_form.php"><i class="ri-admin-line sign-up-admin-icon ms-3"></i></a>
      
+      <a class="nostyle-link" href="admin_register_form.php"><i class="ri-admin-line sign-up-admin-icon ms-3"></i></a>
       
       
     </div>
@@ -100,46 +100,60 @@
     </div>
 </nav>
     <!-- Navbar -->
-     
-    <section class="login-section">
-    <div class="container">
-        <div class="row">
-            <div class="col">
-                <div class="login-form mt-5 mb-5 mx-5 p-5">
-                    <center>
-                        <div class="login-title">
-                            <h3>Sign in</h3>
-                            <div class="info-protected">
-                                <p>Your information is protected</p>
-                            </div>
-                        </div>
-                    </center>
-                    <div class="login-form-container">
-                        <form class="mb-3" action="sign_in.php" method="POST" id="loginForm">
-                            <div class="form-group mt-3">
-                                <input type="email" class="form-control" id="email" name="email" placeholder="Email" required>
-                            </div>
-                            <div class="form-group my-3">
-                                <input type="password" class="form-control" id="password" name="password" placeholder="Password" required minlength="8">
-                            </div>
-                            <button type="button" class="px-4 infinite-btns" name="submit_registration_info" onclick="changeToRegister()">Register</button>
-                            <button type="submit" class="px-4 infinite-btns" name="Submit_login_info">Login</button>
-                        </form>
-                    </div>
-                    <a class="forgot-password-link" href="forgot_password_form.php">Forgot Password</a>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
 
     
 
-  
+    
+<section class="register-section">
 
+<div class="container">
+    <div class="row">
+        <div class="col">
+            
+<div class="register-form mt-5 mb-5 mx-5 p-5">
+    <center><div class="register-title">
+        <h3>Register Form</h3>
+        <div class="info-protected">
+            <P>Your information is protected</P>
+        </div>
+    </div></center>
+    
+    <div class="register-form-container">
+        <form action="admin_sign_up.php" method="POST">
+            <div class="form-group ">
+                <input type="text" class="form-control" id="email" name="first_name" aria-describedby="emailHelp" placeholder ="First Name" required >
+            </div>
+        <div class="form-group mt-3">
+                <input type="text" class="form-control" id="email" name="last_name" aria-describedby="emailHelp" placeholder ="Last Name" required>
+            </div>
+            <div class="form-group mt-3">
+                <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder ="Email" required>
+            </div>
+            <div class="form-group mt-3">
+                <input type="text" class="form-control" id="email" name="address" aria-describedby="emailHelp" placeholder ="Home Address" required>
+            </div>
+            <div class="form-group mt-3">
+                <input type="number" class="form-control" id="email" name="number" aria-describedby="emailHelp" placeholder ="Mobile Phone Number" required minlength="10">
+            </div>
+            <div class="form-group mt-3">
+                <input type="password" class="form-control" id="password" name="password" aria-describedby="passwordHelp" placeholder="Password" required minlength="8">
+            </div>
+            <div class="form-group my-3">
+                <input type="password" class="form-control" id="password" name="confirm_password" aria-describedby="passwordHelp" placeholder="Confirm password" required minlength="8">
+            </div>
+            <button type="submit" class="px-4 infinite-btns" name="submit_registration_info">Register</button>
+            
+            <button type="button" class="px-4 infinite-btns" name="Submit_login_info" onclick="changeToLogin()">Login</button>
+      
+</div>
+</div>
+        </div>
+    </div>
+</div>
 
-<!-- Footer -->
-    <footer class="footer py-2 mt-auto">
+</section>
+    <!-- Footer -->
+    <footer class="footer py-2">
       
   
       <a href="#" class="navbar-brand mx-auto company-logo on-black-bg">Infinite</a>
@@ -150,5 +164,7 @@
     </footer>
 <!-- Footer -->
 
+
+    
 </body>
 </html>

@@ -56,16 +56,24 @@ require 'connection.php';
       <div class="offcanvas-body">
         <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
           <li class="nav-item">
-            <a class="nav-link active-link ms-3 sidebar-link" aria-current="page" href="#">Admin Dashboard</a>
+            <a class="nav-link active-link ms-3 sidebar-link" aria-current="page" href="admin_dashboard.php">Admin Dashboard</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link ms-3 sidebar-link" aria-current="page" href="user_profile.php">Users</a>
+            <a class="nav-link ms-3 sidebar-link" aria-current="page" href="admin_users.php">Users</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link ms-3 sidebar-link" aria-current="page" href="user_profile.php">Products</a>
+            <a class="nav-link ms-3 sidebar-link" aria-current="page" href="admin_products.php">Products</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link ms-3 sidebar-link" aria-current="page" href="user_profile.php">Admins</a>
+            <a class="nav-link ms-3 sidebar-link" aria-current="page" href="admin_admins.php">Admins
+
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link ms-3 sidebar-link" aria-current="page" href="admin_profile.php">Admin Profile
+
+            </a>
           </li>
           
           <li class="nav-item">
@@ -80,7 +88,7 @@ require 'connection.php';
     <div class="d-flex align-items-center ms-auto">
       <!-- Add your items here -->
       <a href="#" class="nav-icons me-5"><i class="ri-user-line"></i></a>
-    <a href="#" class="me-5 nav-logout">Logout</a>
+    <a href="logout.php" class="me-5 nav-logout">Logout</a>
 
     </div>
 
@@ -132,6 +140,15 @@ require 'connection.php';
     }
     else{
       echo"Failed to get the number of sales";}
+
+    
+      $get_rows_from_admins_tb = mysqli_query($conn, "SELECT COUNT(*) AS total_rows FROM admins_tb" );
+  
+      if ($get_rows_from_admins_tb){
+        $admins_row = mysqli_fetch_assoc($get_rows_from_admins_tb);
+      }
+      else{
+        echo"Failed to get the number of admins";}
       
 
 ?>
@@ -169,7 +186,7 @@ require 'connection.php';
 
     <div class="col admin-dashboard-icon-container rounded mx-2">
             <div class="admin-dashboard-text-container"><p class="admin-info-text">
-                1278
+            <?php echo $admins_row['total_rows'] ?>
             </p>
         <p class="admin-info-text-mini">
             Admins
