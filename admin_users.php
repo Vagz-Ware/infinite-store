@@ -1,27 +1,22 @@
 <?php
-
-require 'connection.php';
-
 session_start();
 
-$name = $_SESSION['admin_name'] ?? null;
+$count = $_SESSION['cart_count'] ?? 0; // Retrieve the cart count from the 
+require 'connection.php';
 
+if (isset($_GET['delete'])) {
+    $id = $_GET['delete'];
 
-$count = $_SESSION['cart_count'] ?? 0; // Retrieve the cart count from the session
+    $delete_query = "DELETE FROM users_tb WHERE user_id='$id'";
+    $delete = mysqli_query($conn, $delete_query);
+    if ($delete) {
+      // Delete the product image from the directory
 
-$fetch_admin_info = mysqli_query($conn, "SELECT * FROM `admins_tb` WHERE `admin_fullname` = '$name'") or die("Failed to fetch admin information");
-
-if (mysqli_num_rows($fetch_admin_info) > 0 ){
-  $admin_info_row = mysqli_fetch_assoc($fetch_admin_info);
-}
-
-
-
-if (!isset($name)){
-//  js_redirect('user_login.php');
-  echo "You are not logged in, Please login";
- header("refresh:2; http://localhost/dashboard/infinite%20watches/user_login.php");
-  exit; // Ensure script execution stops after redirection
+      echo '<span class="message">User deleted successfully!</span>';
+      
+  } else {
+      echo '<span class="message">Could not delete the product from the database: ' . mysqli_error($conn) . '</span>';
+  }
 }
 
 ?>
@@ -31,9 +26,8 @@ if (!isset($name)){
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Infinite-Product</title>
-    
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -45,12 +39,13 @@ if (!isset($name)){
     <link
     href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css"
     rel="stylesheet">
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
 </head>
 <body>
+    
     <!-- Navbar -->
-    <nav class="navbar navbar-custom py-3 sticky-top">
+<nav class="navbar navbar-custom py-3 sticky-top">
   <div class="container-fluid top-nav py-1">
 
     
@@ -128,72 +123,51 @@ if (!isset($name)){
 </nav>
     <!-- Navbar -->
 
+    <?php
+    $select_query = "SELECT * FROM `users_tb`";
+    $select = mysqli_query($conn, $select_query);
 
-    <!-- Update admin section -->
-<section class="update-user-section mt-5 mb-5">  
-<div class="container">
-<div class="user-update-form-container centered px-5">
-        <h2 class="text-center mb-5 mt-5">Update the details below:</h2>
-        <form action="admin_updater_code.php" class="mb-5" autocomplete="off"  enctype="multipart/form-data" method="POST">
-            <div class="form-group mb-3 hidden">
-                <input type="hidden" class="form-control"  id="id" aria-describedby="id" name="id" value="<?php echo $admin_info_row['admin_id']; ?>">
-            </div>
-
-            <div class="form-group mt-3 mb-3 hidden">
-                    <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder ="Email">
-                </div>
-
-            <div class="form-group mt-3 mb-3">
-                <input type="text" class="form-control" id="name" readonly aria-describedby="name" name="name" value="<?php echo $admin_info_row['admin_fullname']; ?>">
-            </div>
-
-            <div class="form-group mt-3 mb-3">
+    if (!$select) {
+        die('Query Failed: ' . mysqli_error($conn));
+    }
+    ?>
+    
+    <div class="container">
+        <h1 class="text-center my-5">View All Users</h1>
+        <div class="row">
+            <div class="col">
+            <table class="product-display-table">
+            <thead>
+            <tr>
+                <th>User Id</th>
+                <th>User Fullname</th>
+                <th>User Email</th>
+                <th>User Address</th>
+                <th>User Mobile Number</th>
+                <!-- <th>User Password</th> -->
+                <th>Action</th>
+            </tr>
+            </thead>
+            <?php while ($row = mysqli_fetch_assoc($select)) { 
+               ;?>
+            <tr>
+                <!-- <td><img src="images/<?php echo $row['product_image']; ?>" height="100" alt=""></td> -->
+                <td><?php echo $row['user_id']; ?></td>
+                <td><?php echo $row['user_fullname']; ?></td>
+                <td><?php echo $row['user_email']; ?></td>
+                <td><?php echo $row['user_address']; ?></td>
+                <td><?php echo $row['user_mobile_number']; ?></td>
                 
-                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="email" readonly value="<?php echo $admin_info_row['admin_email']; ?>">
-                
+                <td>
+                    
+                    <a href="admin_users.php?delete=<?php echo $row['user_id']; ?>" class="btn" onclick="return confirm('Are you sure you want to delete this product?');"> <i class="fas fa-trash"></i> Delete </a>
+                </td>
+            </tr>
+            <?php } ?>
+        </table>
             </div>
-            <div class="form-group mt-3 mb-3">
-                
-                <input type="text" class="form-control" id="address" aria-describedby="address" name="address" 
-                placeholder="Home Address"
-                value="<?php echo $admin_info_row['admin_address']; ?>">
-            </div>
-            <div class="form-group mt-3 mb-3">
-                
-                <input type="text" class="form-control" id="mobile_number" aria-describedby="mobile_number" name="mobile_number" value="<?php echo $admin_info_row['admin_mobile_number']; ?>">
-            </div>
-            <!-- <div class="mb-3">
-               
-                <input type="password" class="form-control" id="exampleInputPassword1" name="password" value="<?php echo $admin_info_row['admin_password']; ?>">
-                
-            </div> -->
-            <div class="mb-3">
-        <label for="profile_picture" class="form-label">Upload Profile Picture</label>
-        <input type="file" class="form-control" id="profile_picture" name="profile_picture">
+        </div>
     </div>
-
-            <button type="submit" class="px-4 infinite-btns" name="Submit_update_info">Update</button>
-            
-            <button type="button" class="px-4 infinite-btns" onclick="changeToAdminProfile()">Back to profile</button>
-        </form>
-    </div>
-</div>
-</section>
-
-
-<!-- Update admin section -->
-
-<!-- Footer -->
-    <footer class="footer py-2 ">
-      
-  
-      <a href="#" class="navbar-brand mx-auto company-logo on-black-bg">Infinite</a>
-    <br>
-    <p class="text-center on-black-bg mt-4 mb-0">Created By Loyiso Ndlovu</p>
-      
-      
-    </footer>
-<!-- Footer -->
 
 </body>
 </html>
