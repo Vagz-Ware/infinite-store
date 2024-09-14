@@ -78,7 +78,7 @@ if (isset($_GET['delete'])) {
             <a class="nav-link ms-3 sidebar-link" aria-current="page" href="admin_products.php">Products</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link ms-3 sidebar-link" aria-current="page" href="admin_admins.php">Admins
+            <a class="nav-link ms-3 sidebar-link" aria-current="page" href="admin_view_admins.php">Admins
 
             </a>
           </li>

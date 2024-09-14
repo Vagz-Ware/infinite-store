@@ -37,15 +37,69 @@ if (isset($_POST['add_product'])) {
   $product_name = mysqli_real_escape_string($conn, $_POST['product_name']);
   $product_description = mysqli_real_escape_string($conn, $_POST['product_description']);
   $product_price = mysqli_real_escape_string($conn, $_POST['product_price']);
+  $product_brand = mysqli_real_escape_string($conn, $_POST['product_brand']);
+  $product_arrival_status = mysqli_real_escape_string($conn, $_POST['product_arrival_status']);
+  $product_discount_status = mysqli_real_escape_string($conn, $_POST['product_discount_status']);
+  $product_discount_percentage = mysqli_real_escape_string($conn, $_POST['product_discount_percentage']);
+  $product_case = mysqli_real_escape_string($conn, $_POST['product_case']);
+  $product_movement = mysqli_real_escape_string($conn, $_POST['product_movement']);
+  $product_dial = mysqli_real_escape_string($conn, $_POST['product_dial']);
+  $product_strap = mysqli_real_escape_string($conn, $_POST['product_strap']);
+  $product_style_code = mysqli_real_escape_string($conn, $_POST['product_style_code']);
+  
   $product_image = $_FILES['product_image']['name'];
   $product_image_tmp_name = $_FILES['product_image']['tmp_name'];
   $product_image_folder = 'images/' . $product_image;
 
-  if (empty($product_name) || empty($product_description) || empty($product_price) || empty($product_image)) {
-      echo '<span class="message">Please fill out all fields!</span>';
-  } else {
+  $missing_fields = [];
+
+if (empty($product_name)) {
+    $missing_fields[] = "Product Name";
+}
+if (empty($product_description)) {
+    $missing_fields[] = "Product Description";
+}
+if (empty($product_price)) {
+    $missing_fields[] = "Product Price";
+}
+if (empty($product_image)) {
+    $missing_fields[] = "Product Image";
+}
+if (empty($product_brand)) {
+    $missing_fields[] = "Product Brand";
+}
+if (empty($product_arrival_status)) {
+    $missing_fields[] = "Product Arrival Status";
+}
+if (empty($product_discount_status)) {
+    $missing_fields[] = "Product Discount Status";
+}
+// if (empty($product_discount_percentage)) {
+//   $product_discount_percentage = NULL;
+// }
+if (empty($product_case)) {
+    $missing_fields[] = "Product Case";
+}
+if (empty($product_movement)) {
+    $missing_fields[] = "Product Movement";
+}
+if (empty($product_dial)) {
+    $missing_fields[] = "Product Dial";
+}
+if (empty($product_strap)) {
+    $missing_fields[] = "Product Strap";
+}
+if (empty($product_style_code)) {
+    $missing_fields[] = "Product Style Code";
+}
+
+if (!empty($missing_fields)) {
+    echo '<span class="message">Please fill out the following fields: ' . implode(", ", $missing_fields) . '.</span>';
+}
+
+   else {
        $barcode = rand(1000, 10000000);
-      $insert = "INSERT INTO products_tb (product_barcode,product_name, product_description, product_price, product_image) VALUES ('$barcode','$product_name', '$product_description', '$product_price', '$product_image')";
+      $insert = "INSERT INTO products_tb (product_barcode,product_name, product_description, product_price, product_image, product_brand, product_arrival_status, product_discount, product_discount_percentage, product_case, product_movement, product_dial, product_strap, product_style_code) VALUES ('$barcode','$product_name', '$product_description', '$product_price', '$product_image', '$product_brand','$product_arrival_status', '$product_discount_status', '$product_discount_percentage', '$product_case','$product_movement', '$product_dial', '$product_strap', '$product_style_code')";
       $upload = mysqli_query($conn, $insert);
 
       if ($upload) {
@@ -60,7 +114,9 @@ if (isset($_POST['add_product'])) {
     }
 
   }
+
 }
+
 
 ?>
 
@@ -193,23 +249,71 @@ if (isset($_POST['add_product'])) {
             <input type="text" placeholder="Enter product name" name="product_name" class="form-control ">
             </div>
 
-            <input type="text" placeholder="Enter product description" name="product_description" class="form-control my-3">
+            <input type="text" placeholder="Enter product description" name="product_description" class="form-control my-3 ">
             <input type="number" placeholder="Enter product price" name="product_price" class="form-control my-3">
-            <input type="text" placeholder="Enter product brand" name="product_brand" class="form-control my-3">
-            <input type="text" placeholder="Enter product arrival status" name="product_arrival_status" class="form-control my-3">
-            <input type="text" placeholder="Is the product on discount?" name="product_discount_status" class="form-control my-3">
+
+            <div class="my-4">
+              <h6>Product Brand</h6>
+              <label>
+
+<input type="radio" name="product_brand" value="AP">
+Audemar Piguet
+</label>
+
+<label>
+<input type="radio" name="product_brand" value="LV" class="ms-3">
+Louis Vuitton
+</label>
+
+<label>
+<input type="radio" name="product_brand" value="Rolex" class="ms-3">
+Rolex
+</label>
+            </div>
+          
+            <div class="my-4">
+              <h6>Product Arrival Status</h6>
+              <label>
+
+<input type="radio" name="product_arrival_status" value=" New">
+New
+</label>
+
+<label>
+<input type="radio" name="product_arrival_status" value="Old" class="ms-3">
+Old
+</label>
+
+            </div>
+
             
-            <input type="text" placeholder="Is the product on discount?" name="product_discount_status" class="form-control my-3">
+            <div class="my-4">
+              <h6>Product Discount Status</h6>
+              <label>
+
+<input type="radio" name="product_discount_status" value=" True">
+On Discount
+</label>
+
+<label>
+<input type="radio" name="product_discount_status" value="False" class="ms-3">
+Not on Discount
+</label>
+
+            </div>
+
             
-            <input type="text" placeholder="Is the product on discount?" name="product_discount_status" class="form-control my-3">
+            <input type="number" placeholder="If the product is on discount, what percentage is discount? If not on discount leave blank." name="product_discount_percentage" class="form-control my-3">
             
-            <input type="text" placeholder="Is the product on discount?" name="product_discount_status" class="form-control my-3">
+            <input type="text" placeholder="Product Case" name="product_case" class="form-control my-3">
             
-            <input type="text" placeholder="Is the product on discount?" name="product_discount_status" class="form-control my-3">
+            <input type="text" placeholder="Product Movement" name="product_movement" class="form-control my-3">
             
-            <input type="text" placeholder="Is the product on discount?" name="product_discount_status" class="form-control my-3">
+            <input type="text" placeholder="Product Dial" name="product_dial" class="form-control my-3">
             
-            <input type="text" placeholder="Is the product on discount?" name="product_discount_status" class="form-control my-3">
+            <input type="text" placeholder="Product Strap" name="product_strap" class="form-control my-3">
+            
+            <input type="text" placeholder="Product Style Code" name="product_style_code" class="form-control my-3">
             <input type="file" accept="image/png, image/jpeg, image/jpg" name="product_image" class="form-control my-3">
             <input type="submit" class="btn" name="add_product" value="Add Product">
         </form>
@@ -227,13 +331,14 @@ if (isset($_POST['add_product'])) {
                 <th>Product Description</th>
                 <th>Product Price</th>
                 <th>Action</th>
+                
             </tr>
             </thead>
             <?php while ($row = mysqli_fetch_assoc($select)) { ?>
             <tr>
                 <td><img src="images/<?php echo $row['product_image']; ?>" height="100" alt=""></td>
                 <td><?php echo $row['product_name']; ?></td>
-                <td><?php echo $row['product_description']; ?></td>
+                <td ><?php echo $row['product_description']; ?></td>
                 <td>R<?php echo $row['product_price']; ?></td>
                 <td>
                     <a href="admin_product_update.php?edit=<?php echo $row['product_barcode']; ?>" class="btn"> <i class="ri-file-edit-line"></i> Edit </a>

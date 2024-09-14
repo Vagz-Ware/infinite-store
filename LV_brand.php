@@ -166,7 +166,8 @@ $count = $_SESSION['cart_count'] ?? 0; // Retrieve the cart count from the sessi
           <img class='card-img-top new-arrival-pic' src='images/{$row['product_image']}'>
       </a>
       <div class='card-body'>
-        <h6 class='card-title'>{$row['product_name']}</h6>
+        <h6 class='card-title'>{$row['product_name']}</
+        h6>
         <p class='card-text'>R {$row['product_price']}</p>
 
       </div>
