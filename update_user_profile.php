@@ -132,37 +132,37 @@ if (!isset($name)) {
 <div class="container">
 <div class="user-update-form-container centered px-5">
         <h2 class="text-center mb-5 mt-5">Update the details below:</h2>
-        <form action="user_updater_code.php" class="mb-5" autocomplete="off"  enctype="multipart/form-data" method="POST">
+        <form action="update_user_profile.php" class="mb-5" autocomplete="off"  enctype="multipart/form-data" method="POST">
             <div class="form-group mb-3 hidden">
-                <input type="hidden" class="form-control"  id="id" aria-describedby="id" name="id" value="<?php echo $row['user_id']; ?>">
+                <input type="hidden" class="form-control"  id="id" aria-describedby="id" name="id" value="<?php echo $user_info_row['user_id']; ?>">
             </div>
-
+<!-- 
             <div class="form-group mt-3 mb-3 hidden">
                     <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder ="Email">
-                </div>
+                </div> -->
 
             <div class="form-group mt-3 mb-3">
-                <input type="text" class="form-control" id="name" readonly aria-describedby="name" name="name" value="<?php echo $row['user_fullname']; ?>">
+                <input type="text" class="form-control" id="name" readonly aria-describedby="name" name="name" value="<?php echo $user_info_row['user_fullname']; ?>">
             </div>
 
             <div class="form-group mt-3 mb-3">
                 
-                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="email" readonly value="<?php echo $row['user_email']; ?>">
+                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="email" readonly value="<?php echo $user_info_row['user_email']; ?>">
                 
             </div>
             <div class="form-group mt-3 mb-3">
                 
                 <input type="text" class="form-control" id="address" aria-describedby="address" name="address" 
                 placeholder="Home Address"
-                value="<?php echo $row['user_address']; ?>">
+                value="<?php echo $user_info_row['user_address']; ?>">
             </div>
             <div class="form-group mt-3 mb-3">
                 
-                <input type="text" class="form-control" id="mobile_number" aria-describedby="mobile_number" name="mobile_number" value="<?php echo $row['user_mobile_number']; ?>">
+                <input type="text" class="form-control" id="mobile_number" aria-describedby="mobile_number" name="mobile_number" value="<?php echo $user_info_row['user_mobile_number']; ?>">
             </div>
             <!-- <div class="mb-3">
                
-                <input type="password" class="form-control" id="exampleInputPassword1" name="password" value="<?php echo $row['user_password']; ?>">
+                <input type="password" class="form-control" id="exampleInputPassword1" name="password" value="<?php echo $user_info_row['user_password']; ?>">
                 
             </div> -->
             <div class="mb-3">

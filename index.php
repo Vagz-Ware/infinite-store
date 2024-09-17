@@ -87,7 +87,7 @@ $count = $_SESSION['cart_count'] ?? 0; // Retrieve the cart count from the sessi
 
     <div class="d-flex align-items-center ms-auto">
       <!-- Add your items here -->
-      <a href="#" class="nav-icons me-5"><i class="ri-user-line"></i></a>
+      <a href="user_profile.php" class="nav-icons me-5"><i class="ri-user-line"></i></a>
       <a href="user_wishlist.php" class="nav-icons me-5"><i class="ri-heart-line"></i></a>
       <a href="view_cart.php" class="nav-icons me-5">
     <i class="ri-shopping-cart-line"></i>
@@ -171,7 +171,7 @@ $count = $_SESSION['cart_count'] ?? 0; // Retrieve the cart count from the sessi
       </a>
       <div class='card-body'>
         <h6 class='card-title text-ellipsis'>{$row['product_name']}</h6>
-        <p class='card-text'>R {$row['product_price']}</p>
+        <p class='card-text text-center'>R {$row['product_price']}</p>
 
       </div>
       <button type='submit' name ='add_to_cart' class='nostyle-btn'><i class='ri-shopping-cart-line'></i>Add To Cart</button>
@@ -252,10 +252,10 @@ if (mysqli_num_rows($collect_from_db) > 0) {
                         <h6 class='card-title on-black-bg text-ellipsis'>{$row['product_name']}</h6>
                         <span class=''>
                          
-                        <p class='card-text on-black-bg text-decoration-line-through'>  R {$row['product_price']}</p></span>
+                        <p class='card-text text-center on-black-bg text-decoration-line-through'>  R {$row['product_price']}</p></span>
 
                         <span class=''>
-                         <p class='card-text on-black-bg new-price'>R {$discountedPrice}</p></span>
+                         <p class='card-text text-center on-black-bg new-price'>R {$discountedPrice}</p></span>
                         
                         
                     </div>

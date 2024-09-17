@@ -12,6 +12,12 @@ if (mysqli_num_rows($fetch_user_info) > 0 ){
   $user_info_row = mysqli_fetch_assoc($fetch_user_info);
 }
 
+if (!isset($name)) {
+  echo "You are not logged in, Please login";
+  header("refresh:2; url=user_login.php");
+  exit; // Ensure script execution stops after redirection
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -38,6 +44,7 @@ if (mysqli_num_rows($fetch_user_info) > 0 ){
 </head>
 <body class="d-flex flex-column min-vh-100
 ">
+
 
     <!-- Navbar -->
     <nav class="navbar navbar-custom py-3 sticky-top">
@@ -82,6 +89,10 @@ if (mysqli_num_rows($fetch_user_info) > 0 ){
           <li class="nav-item">
             <a class="nav-link ms-3 sidebar-link" aria-current="page" href="user_profile.php">Profile</a>
           </li>
+
+          <li class="nav-item">
+            <a class="nav-link ms-3 sidebar-link" aria-current="page" href="user_login.php">Login/Register</a>
+          </li>
           
           <li class="nav-item">
             <a class="nav-link ms-3 sidebar-link" aria-current="page" href="logout.php">Logout</a>
@@ -94,8 +105,8 @@ if (mysqli_num_rows($fetch_user_info) > 0 ){
 
     <div class="d-flex align-items-center ms-auto">
       <!-- Add your items here -->
-      <a href="#" class="nav-icons me-5"><i class="ri-user-line"></i></a>
-      <a href="#" class="nav-icons me-5"><i class="ri-heart-line"></i></a>
+      <a href="user_profile.php" class="nav-icons me-5"><i class="ri-user-line"></i></a>
+      <a href="user_wishlist.php" class="nav-icons me-5"><i class="ri-heart-line"></i></a>
       <a href="view_cart.php" class="nav-icons me-5">
     <i class="ri-shopping-cart-line"></i>
     <span class="cart-count"><?php echo $count; ?></span>

@@ -22,6 +22,11 @@
 
 }
 
+.nostyle-link{
+  text-decoration: none;
+  color: var(--secondary-color);
+}
+
 .nav-logout{
   text-decoration: none;
   color: #000;
@@ -468,6 +473,10 @@
 
 /* User login page */
 
+.sign-up-admin-icon{
+ font-size: 23px;
+}
+
     /* login section */
     .login-form{
       border: 1px solid var(--secondary-color);
@@ -492,6 +501,11 @@
   .view-cart-img{
     height: 100px;
     width: 100px;
+  }
+
+  .cart-btns{
+    display: flex;
+    justify-content: space-between;
   }
 
   .cart-total-displays{
@@ -753,3 +767,9 @@
 .product-display-table a {
   color: var(--accent-color);
 }
+
+/* View Users */
+.product-display-table{
+  width: 100%;
+}
+/* View Users */

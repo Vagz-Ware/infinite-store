@@ -37,3 +37,11 @@ function changeToLogin() {
 function changeToUserUpdate() {
     window.location.href='update_user_profile.php';
 }
+
+function changeToAdminUpdate() {
+    window.location.href='update_admin_profile.php';
+}
+
+function changeToUserProfile(){
+    window.location.href='user_profile.php';
+}

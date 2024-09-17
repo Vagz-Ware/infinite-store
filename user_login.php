@@ -36,7 +36,9 @@
       <i class="ri-search-line ms-3 nav-icons"></i>
       <span class="ms-2">Search</span>
       </button>
-      <a class="nostyle-link" href="admin_signin_form.php"><i class="ri-admin-line sign-up-admin-icon ms-3"></i></a>
+      <!-- <a class="nostyle-link" href="admin_signin_form.php">
+        <i class="ri-admin-line sign-up-admin-icon ms-3"></i>
+      </a> -->
      
       
       
@@ -76,12 +78,12 @@
     </div>
     <a href="index.php" class="navbar-brand mx-auto company-logo">Infinite</a>
 
-    <div class="d-flex align-items-center ms-auto">
-      <!-- Add your items here -->
+    <!-- <div class="d-flex align-items-center ms-auto">
+     
       <a href="#" class="nav-icons me-5"><i class="ri-user-line"></i></a>
       <a href="#" class="nav-icons me-5"><i class="ri-heart-line"></i></a>
       <a href="#" class="nav-icons me-5"><i class="ri-shopping-cart-line"></i></a>
-    </div>
+    </div> -->
 
   </div>
   

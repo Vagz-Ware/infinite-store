@@ -27,6 +27,7 @@ $count = $_SESSION['cart_count'] ?? 0; // Retrieve the cart count from the sessi
 </head>
 <body>
 
+
     <!-- Navbar -->
     <nav class="navbar navbar-custom py-3 sticky-top">
   <div class="container-fluid top-nav py-1">
@@ -70,6 +71,10 @@ $count = $_SESSION['cart_count'] ?? 0; // Retrieve the cart count from the sessi
           <li class="nav-item">
             <a class="nav-link ms-3 sidebar-link" aria-current="page" href="user_profile.php">Profile</a>
           </li>
+
+          <li class="nav-item">
+            <a class="nav-link ms-3 sidebar-link" aria-current="page" href="user_login.php">Login/Register</a>
+          </li>
           
           <li class="nav-item">
             <a class="nav-link ms-3 sidebar-link" aria-current="page" href="logout.php">Logout</a>
@@ -82,8 +87,8 @@ $count = $_SESSION['cart_count'] ?? 0; // Retrieve the cart count from the sessi
 
     <div class="d-flex align-items-center ms-auto">
       <!-- Add your items here -->
-      <a href="#" class="nav-icons me-5"><i class="ri-user-line"></i></a>
-      <a href="#" class="nav-icons me-5"><i class="ri-heart-line"></i></a>
+      <a href="user_profile.php" class="nav-icons me-5"><i class="ri-user-line"></i></a>
+      <a href="user_wishlist.php" class="nav-icons me-5"><i class="ri-heart-line"></i></a>
       <a href="view_cart.php" class="nav-icons me-5">
     <i class="ri-shopping-cart-line"></i>
     <span class="cart-count"><?php echo $count; ?></span>
@@ -131,6 +136,7 @@ $count = $_SESSION['cart_count'] ?? 0; // Retrieve the cart count from the sessi
             $product_price = $row['product_price'];
             $product_case = $row['product_case'];
             $product_movement = $row['product_movement'];
+            $product_brand = $row['product_brand'];
             $product_dial = $row['product_dial'];
             $product_strap = $row['product_strap'];
             $product_style_code = $row['product_style_code'];
@@ -214,7 +220,7 @@ $count = $_SESSION['cart_count'] ?? 0; // Retrieve the cart count from the sessi
         <div class="container-fluid pb-3">
             <div class="row">
                 <?php
-                    $collect_from_db = mysqli_query($conn, "SELECT * FROM `products_tb` WHERE product_brand = 'LV' LIMIT 4 ") or die ('Query Failed');
+                    $collect_from_db = mysqli_query($conn, "SELECT * FROM `products_tb` WHERE product_brand = '$product_brand' LIMIT 4 ") or die ('Query Failed');
 
                     if (mysqli_num_rows($collect_from_db) > 0) {
                       while($row = mysqli_fetch_assoc($collect_from_db)){

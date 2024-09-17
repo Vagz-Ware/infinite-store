@@ -28,6 +28,7 @@ $count = $_SESSION['cart_count'] ?? 0; // Retrieve the cart count from the sessi
 </head>
 <body>
 
+
     <!-- Navbar -->
     <nav class="navbar navbar-custom py-3 sticky-top">
   <div class="container-fluid top-nav py-1">
@@ -71,6 +72,10 @@ $count = $_SESSION['cart_count'] ?? 0; // Retrieve the cart count from the sessi
           <li class="nav-item">
             <a class="nav-link ms-3 sidebar-link" aria-current="page" href="user_profile.php">Profile</a>
           </li>
+
+          <li class="nav-item">
+            <a class="nav-link ms-3 sidebar-link" aria-current="page" href="user_login.php">Login/Register</a>
+          </li>
           
           <li class="nav-item">
             <a class="nav-link ms-3 sidebar-link" aria-current="page" href="logout.php">Logout</a>
@@ -83,8 +88,8 @@ $count = $_SESSION['cart_count'] ?? 0; // Retrieve the cart count from the sessi
 
     <div class="d-flex align-items-center ms-auto">
       <!-- Add your items here -->
-      <a href="#" class="nav-icons me-5"><i class="ri-user-line"></i></a>
-      <a href="#" class="nav-icons me-5"><i class="ri-heart-line"></i></a>
+      <a href="user_profile.php" class="nav-icons me-5"><i class="ri-user-line"></i></a>
+      <a href="user_wishlist.php" class="nav-icons me-5"><i class="ri-heart-line"></i></a>
       <a href="view_cart.php" class="nav-icons me-5">
     <i class="ri-shopping-cart-line"></i>
     <span class="cart-count"><?php echo $count; ?></span>
@@ -162,12 +167,13 @@ $count = $_SESSION['cart_count'] ?? 0; // Retrieve the cart count from the sessi
       <div class='card p-5 new-arrival-cards' >
       <form action='cart_functions.php' method='post'>
       <input type='hidden' name='id' value='{$row['product_barcode']}'>
-      <a target='_blank' href='{$row['product_link']}?id=" . urlencode($row['product_barcode']) . "'>
+     
+      <a target='_blank' href='product_page.php?id=" . urlencode($row['product_barcode']) . "'>
           <img class='card-img-top new-arrival-pic' src='images/{$row['product_image']}'>
       </a>
       <div class='card-body'>
         <h6 class='card-title text-ellipsis'>{$row['product_name']}</h6>
-        <p class='card-text'>R {$row['product_price']}</p>
+        <p class='card-text text-center'>R {$row['product_price']}</p>
 
       </div>
       <button type='submit' name ='add_to_cart' class='nostyle-btn'><i class='ri-shopping-cart-line'></i>Add To Cart</button>
@@ -191,7 +197,7 @@ $count = $_SESSION['cart_count'] ?? 0; // Retrieve the cart count from the sessi
 
   
     <!-- On Sale Section -->
-    <section class="on-sale-section pb-5 pt-4">
+    <section class="on-sale-section pb-5 pt-4 mb-1">
       
         <h1 class="text-center on-black-bg">On Sale</h1>
       <div class="container-fluid text-center">
@@ -235,17 +241,18 @@ if (mysqli_num_rows($collect_from_db) > 0) {
             <div class='card p-5 on-sale-cards'>
                 <form action='cart_functions.php' method='post'>
                     <input type='hidden' name='id' value='{$row['product_barcode']}'>
-                    <a target='_blank' href='{$row['product_link']}?id=" . urlencode($row['product_barcode']) . "'>
+                    
+      <a target='_blank' href='product_page.php?id=" . urlencode($row['product_barcode']) . "'>
                         <img class='card-img-top new-arrival-pic w-100' src='images/{$row['product_image']}'>
                     </a>
                     <div class='card-body'>
-                        <h6 class='card-title on-black-bg'>{$row['product_name']}</h6>
+                        <h6 class='card-title on-black-bg text-ellipsis'>{$row['product_name']}</h6>
                         <span class=''>
                          
-                        <p class='card-text on-black-bg text-decoration-line-through'>  R {$row['product_price']}</p></span>
+                        <p class='card-text on-black-bg text-decoration-line-through text-center'>  R {$row['product_price']}</p></span>
 
                         <span class=''>
-                         <p class='card-text on-black-bg new-price'>R {$discountedPrice}</p></span>
+                         <p class='card-text on-black-bg new-price text-center'>R {$discountedPrice}</p></span>
                         
                         
                     </div>

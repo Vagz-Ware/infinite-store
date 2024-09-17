@@ -39,8 +39,8 @@ if (mysqli_num_rows($fetch_user_info) > 0 ){
 <body class="d-flex flex-column min-vh-100
 ">
 
-    <!-- Navbar -->
-    <nav class="navbar navbar-custom py-3 sticky-top">
+<!-- Navbar -->
+<nav class="navbar navbar-custom py-3 sticky-top">
   <div class="container-fluid top-nav py-1">
 
     
@@ -82,6 +82,10 @@ if (mysqli_num_rows($fetch_user_info) > 0 ){
           <li class="nav-item">
             <a class="nav-link ms-3 sidebar-link" aria-current="page" href="user_profile.php">Profile</a>
           </li>
+
+          <li class="nav-item">
+            <a class="nav-link ms-3 sidebar-link" aria-current="page" href="user_login.php">Login/Register</a>
+          </li>
           
           <li class="nav-item">
             <a class="nav-link ms-3 sidebar-link" aria-current="page" href="logout.php">Logout</a>
@@ -94,8 +98,8 @@ if (mysqli_num_rows($fetch_user_info) > 0 ){
 
     <div class="d-flex align-items-center ms-auto">
       <!-- Add your items here -->
-      <a href="#" class="nav-icons me-5"><i class="ri-user-line"></i></a>
-      <a href="#" class="nav-icons me-5"><i class="ri-heart-line"></i></a>
+      <a href="user_profile.php" class="nav-icons me-5"><i class="ri-user-line"></i></a>
+      <a href="user_wishlist.php" class="nav-icons me-5"><i class="ri-heart-line"></i></a>
       <a href="view_cart.php" class="nav-icons me-5">
     <i class="ri-shopping-cart-line"></i>
     <span class="cart-count"><?php echo $count; ?></span>
@@ -132,7 +136,7 @@ if (mysqli_num_rows($fetch_user_info) > 0 ){
       <th scope="col">Price</th>
       <th scope="col" class="text-center">Quantity</th>
       <th scope="col">Subtotal</th>
-      <th scope="col">Actions</th>
+      <th scope="col" class="text-center">Actions</th>
     </tr>
   </thead>
   <tbody>
@@ -167,7 +171,9 @@ if (mysqli_num_rows($fetch_user_info) > 0 ){
       echo '<td class="table-header-cart-text text-ellipsis">R '.$item['price'].'</td>';
       echo '<td class="table-header-cart-text text-center"> <input type="number" min="1" class="w-50" name="new_item_quantity" value="'.$item['quantity'].'"></td>';
       echo '<td class="table-header-cart-text table-header-cart-text-price text-ellipsis"> R '.$formatted_item_subtotal.'</td>';
-      echo '<td class="table-header-cart-text"><button class="infinite-btns p-1" type="submit" name="update_quantity_btn">Update</button></td>';
+      echo ' <td class="table-header-cart-text"><div class="cart-btns"><button class="infinite-btns p-1 me-1" type="submit" name="update_quantity_btn">Update</button> <button class="infinite-btns p-1" type="submit" name="btn_del">Delete</button></div></td>';
+      
+      // echo '<td class="table-header-cart-text"><button class="infinite-btns p-1" type="submit" name="btn_del">Delete</button></td>';
       echo '</tr>';
       echo '</form>';
     }

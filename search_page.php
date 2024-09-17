@@ -28,6 +28,7 @@
 </head>
 <body>
     
+
     <!-- Navbar -->
     <nav class="navbar navbar-custom py-3 sticky-top">
   <div class="container-fluid top-nav py-1">
@@ -71,6 +72,10 @@
           <li class="nav-item">
             <a class="nav-link ms-3 sidebar-link" aria-current="page" href="user_profile.php">Profile</a>
           </li>
+
+          <li class="nav-item">
+            <a class="nav-link ms-3 sidebar-link" aria-current="page" href="user_login.php">Login/Register</a>
+          </li>
           
           <li class="nav-item">
             <a class="nav-link ms-3 sidebar-link" aria-current="page" href="logout.php">Logout</a>
@@ -83,8 +88,8 @@
 
     <div class="d-flex align-items-center ms-auto">
       <!-- Add your items here -->
-      <a href="#" class="nav-icons me-5"><i class="ri-user-line"></i></a>
-      <a href="#" class="nav-icons me-5"><i class="ri-heart-line"></i></a>
+      <a href="user_profile.php" class="nav-icons me-5"><i class="ri-user-line"></i></a>
+      <a href="user_wishlist.php" class="nav-icons me-5"><i class="ri-heart-line"></i></a>
       <a href="view_cart.php" class="nav-icons me-5">
     <i class="ri-shopping-cart-line"></i>
     <span class="cart-count"><?php echo $count; ?></span>
