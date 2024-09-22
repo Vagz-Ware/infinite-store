@@ -1,3 +1,9 @@
+<?php
+session_start();
+
+$count = $_SESSION['cart_count'] ?? 0; // Retrieve the cart count from the session
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

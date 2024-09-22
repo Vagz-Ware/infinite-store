@@ -47,10 +47,12 @@ if (isset($_POST['submit_registration_info'])) {
 
     if (empty($errors)) {
         $passwordHash = password_hash($user_password, PASSWORD_DEFAULT);
+    
+    $user_id = "Infi-" . rand(1, 1000);
         
-        // Check for duplicate email
-        $check_for_duplicates = mysqli_query($conn, "SELECT * FROM `users_tb` WHERE `user_email` = '$user_email'") or die('Query Failed');
-        if (mysqli_num_rows($check_for_duplicates) > 0) {
+        // Check for duplicate email and user id
+        $check_for_duplicate_emails = mysqli_query($conn, "SELECT * FROM `users_tb` WHERE `user_email` = '$user_email'") or die('Query Failed');
+        if (mysqli_num_rows($check_for_duplicate_emails) > 0) {
             echo "User with this email already exists.";
             echo "<script>setTimeout(function() { window.location.href = 'register.php'; }, 2000);</script>";
             exit;
@@ -59,7 +61,7 @@ if (isset($_POST['submit_registration_info'])) {
         $first_name = ucwords($first_name);
         $last_name = ucwords($last_name);
         $full_name = $first_name . " " . $last_name;
-        $query = "INSERT INTO `users_tb` (user_fullname, user_email, user_address, user_mobile_number, user_password) VALUES ('$full_name', '$user_email', '$home_address', '$mobile_number', '$passwordHash')";
+        $query = "INSERT INTO `users_tb` (user_id, user_fullname, user_email, user_address, user_mobile_number, user_password) VALUES ('$user_id','$full_name', '$user_email', '$home_address', '$mobile_number', '$passwordHash')";
         $result = mysqli_query($conn, $query);
 
         if ($result) {
