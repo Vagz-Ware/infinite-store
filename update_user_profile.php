@@ -4,18 +4,22 @@ require 'connection.php';
 
 session_start();
 
-$name = $_SESSION['user_name'] ?? null;
+$custom_id = $_SESSION['custom_id'] ?? null;
+
 $count = $_SESSION['cart_count'] ?? 0; // Retrieve the cart count from the session
 
-$fetch_user_info = mysqli_query($conn, "SELECT * FROM `users_tb` WHERE `user_fullname` = '$name'") or die("Failed to fetch user information");
+$fetch_user_info = mysqli_query($conn, "SELECT * FROM `users_tb` WHERE `user_id` = '$custom_id'") or die("Failed to fetch user information");
 
-if (mysqli_num_rows($fetch_user_info) > 0) {
+if (mysqli_num_rows($fetch_user_info) > 0 ){
   $user_info_row = mysqli_fetch_assoc($fetch_user_info);
 }
 
-if (!isset($name)) {
+
+
+if (!isset($custom_id)){
+//  js_redirect('user_login.php');
   echo "You are not logged in, Please login";
-  header("refresh:2; url=user_login.php");
+ header("refresh:2; http://localhost/dashboard/infinite%20watches/user_login.php");
   exit; // Ensure script execution stops after redirection
 }
 
@@ -46,7 +50,7 @@ if (!isset($name)) {
 <body>
 
     <!-- Navbar -->
-    <nav class="navbar navbar-custom py-3 sticky-top">
+  <nav class="navbar navbar-custom py-3 sticky-top">
   <div class="container-fluid top-nav py-1">
 
     
@@ -105,7 +109,7 @@ if (!isset($name)) {
       <a href="view_cart.php" class="nav-icons me-5">
     <i class="ri-shopping-cart-line"></i>
     <span class="cart-count"><?php echo $count; ?></span>
-</a>
+  </a>
 
     </div>
 
@@ -132,7 +136,7 @@ if (!isset($name)) {
 <div class="container">
 <div class="user-update-form-container centered px-5">
         <h2 class="text-center mb-5 mt-5">Update the details below:</h2>
-        <form action="update_user_profile.php" class="mb-5" autocomplete="off"  enctype="multipart/form-data" method="POST">
+        <form action="user_updater_code.php" class="mb-5" autocomplete="off"  enctype="multipart/form-data" method="POST">
             <div class="form-group mb-3 hidden">
                 <input type="hidden" class="form-control"  id="id" aria-describedby="id" name="id" value="<?php echo $user_info_row['user_id']; ?>">
             </div>
@@ -142,12 +146,12 @@ if (!isset($name)) {
                 </div> -->
 
             <div class="form-group mt-3 mb-3">
-                <input type="text" class="form-control" id="name" readonly aria-describedby="name" name="name" value="<?php echo $user_info_row['user_fullname']; ?>">
+                <input type="text" class="form-control" id="name" aria-describedby="name" name="name" value="<?php echo $user_info_row['user_fullname']; ?>">
             </div>
 
             <div class="form-group mt-3 mb-3">
                 
-                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="email" readonly value="<?php echo $user_info_row['user_email']; ?>">
+                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="email"  value="<?php echo $user_info_row['user_email']; ?>">
                 
             </div>
             <div class="form-group mt-3 mb-3">
