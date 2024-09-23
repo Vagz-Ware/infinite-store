@@ -2,7 +2,26 @@
 require 'connection.php';
 
 session_start();
-$session_name = $_SESSION['user_name'] ?? null;
+
+$custom_id = $_SESSION['custom_id'] ?? null;
+
+$count = $_SESSION['cart_count'] ?? 0; // Retrieve the cart count from the session
+
+$fetch_admin_info = mysqli_query($conn, "SELECT * FROM `admins_tb` WHERE `admin_id` = '$custom_id'") or die("Failed to fetch admin information");
+
+if (mysqli_num_rows($fetch_admin_info) > 0 ){
+  $admin_info_row = mysqli_fetch_assoc($fetch_admin_info);
+}
+
+
+
+if (!isset($custom_id)){
+//  js_redirect('user_login.php');
+  echo "You are not logged in, Please login";
+ header("refresh:2; http://localhost/dashboard/infinite%20watches/user_login.php");
+  exit; // Ensure script execution stops after redirection
+}
+
 
 function js_redirect($url) {
     echo "<script type='text/javascript'>setTimeout(function(){ window.location.href = '$url'; });</script>";

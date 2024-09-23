@@ -26,15 +26,15 @@ if (isset($_POST['Submit_login_info'])) {
         if (strpos($email, '@admin.com') !== false) {
             $query = "SELECT * FROM `admins_tb` WHERE `admin_email` = '$email'";
             $redirectUrl = "admin_dashboard.php";
-            $sessionVar = 'admin_name';
+            $sessionVar = 'custom_id';
             $passwordField = 'admin_password';
-            $fullnameField = 'admin_fullname';
+            $id_variable = 'admin_id';
         } else {
             $query = "SELECT * FROM `users_tb` WHERE `user_email` = '$email'";
             $redirectUrl = "index.php";
-            $sessionVar = 'user_name';
+            $sessionVar = 'custom_id';
             $passwordField = 'user_password';
-            $fullnameField = 'user_fullname';
+            $id_variable = 'user_id';
         }
 
         // Query to retrieve the user with the provided email
@@ -45,7 +45,7 @@ if (isset($_POST['Submit_login_info'])) {
 
             // Verify the password using password_verify
             if (password_verify($password, $row[$passwordField])) {
-                $_SESSION[$sessionVar] = $row[$fullnameField];
+                $_SESSION[$sessionVar] = $row[$id_variable];
                 echo "Logging you in...";
                 echo "<script>window.location.href = '$redirectUrl';</script>";
                 exit; // Ensure script execution stops after redirection

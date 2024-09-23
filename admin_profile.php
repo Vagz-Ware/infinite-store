@@ -4,12 +4,11 @@ require 'connection.php';
 
 session_start();
 
-$name = $_SESSION['admin_name'] ?? null;
-
+$custom_id = $_SESSION['custom_id'] ?? null;
 
 $count = $_SESSION['cart_count'] ?? 0; // Retrieve the cart count from the session
 
-$fetch_admin_info = mysqli_query($conn, "SELECT * FROM `admins_tb` WHERE `admin_fullname` = '$name'") or die("Failed to fetch admin information");
+$fetch_admin_info = mysqli_query($conn, "SELECT * FROM `admins_tb` WHERE `admin_id` = '$custom_id'") or die("Failed to fetch admin information");
 
 if (mysqli_num_rows($fetch_admin_info) > 0 ){
   $admin_info_row = mysqli_fetch_assoc($fetch_admin_info);
@@ -17,7 +16,7 @@ if (mysqli_num_rows($fetch_admin_info) > 0 ){
 
 
 
-if (!isset($name)){
+if (!isset($custom_id)){
 //  js_redirect('user_login.php');
   echo "You are not logged in, Please login";
  header("refresh:2; http://localhost/dashboard/infinite%20watches/user_login.php");

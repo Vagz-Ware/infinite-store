@@ -1,7 +1,7 @@
 <?php
 require 'connection.php';
 session_start();
-$name = $_SESSION['user_name'] ?? null;
+$name = $_SESSION['sessionVar'] ?? null;
 
 
 $count = $_SESSION['cart_count'] ?? 0; // Retrieve the cart count from the session
