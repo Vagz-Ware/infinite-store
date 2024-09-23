@@ -10,12 +10,10 @@ $count = $_SESSION['cart_count'] ?? 0; // Retrieve the cart count from the sessi
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Infinite-Home</title>
-    
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="css/bootstrap.min.css">
-    
     <script src="js/bootstrap.bundle.min.js" defer></script>
     <link rel="stylesheet" href="css/styles.css">
     <script src="js/main.js"></script>
@@ -29,22 +27,17 @@ $count = $_SESSION['cart_count'] ?? 0; // Retrieve the cart count from the sessi
 <body>
 
     <!-- Navbar -->
-    <nav class="navbar navbar-custom py-3 sticky-top">
+<nav class="navbar navbar-custom py-3 sticky-top">
   <div class="container-fluid top-nav py-1">
-
-    
     <div class=" d-flex align-items-center">
-      <button class="navbar-toggler remove-toggle-bg" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+      <button class="navbar-toggler remove-toggle-bg" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"      aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
         <i class="ri-menu-line nav-icons"></i>
-      <span class="ms-2">Menu</span>
+        <span class="ms-2">Menu</span>
       </button>
       <button class="nostyle-btn" onclick="displaySearchContainer()">
-      <i class="ri-search-line ms-3 nav-icons"></i>
-      <span class="ms-2">Search</span>
+        <i class="ri-search-line ms-3 nav-icons"></i>
+        <span class="ms-2">Search</span>
       </button>
-     
-      
-      
     </div>
 
 
@@ -260,7 +253,7 @@ if (mysqli_num_rows($collect_from_db) > 0) {
                         
                     </div>
                     <button type='submit' name ='add_to_cart' class='nostyle-btn on-black-bg'><i class='ri-shopping-cart-line on-black-bg'></i>Add To Cart</button>
-
+                    <button type='submit' name ='add_to_wishlist' class='nostyle-btn on-black-bg mt-3 text-center ms-2'><i class='ri-heart-line'></i>Add To Wishlist</button>
                 </form>
             </div>
         </div>

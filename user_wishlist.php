@@ -1,20 +1,24 @@
 <?php
 require 'connection.php';
-session_start();
-$name = $_SESSION['sessionVar'] ?? null;
 
+session_start();
+
+$custom_id = $_SESSION['custom_id'] ?? null;
 
 $count = $_SESSION['cart_count'] ?? 0; // Retrieve the cart count from the session
 
-$fetch_user_info = mysqli_query($conn, "SELECT * FROM `users_tb` WHERE `user_fullname` = '$name'") or die("Failed to fetch user information");
+$fetch_user_info = mysqli_query($conn, "SELECT * FROM `users_tb` WHERE `user_id` = '$custom_id'") or die("Failed to fetch user information");
 
 if (mysqli_num_rows($fetch_user_info) > 0 ){
   $user_info_row = mysqli_fetch_assoc($fetch_user_info);
 }
 
-if (!isset($name)) {
+
+
+if (!isset($custom_id)){
+//  js_redirect('user_login.php');
   echo "You are not logged in, Please login";
-  header("refresh:2; url=user_login.php");
+ header("refresh:2; http://localhost/dashboard/infinite%20watches/user_login.php");
   exit; // Ensure script execution stops after redirection
 }
 
@@ -147,7 +151,7 @@ if (!isset($name)) {
   </thead>
   <tbody>
   <?php 
-    $fetch_user_wishlist = mysqli_query($conn, "SELECT * FROM `wishlist_tb` WHERE `user` = '$name' " ) or die("Failed to fetch user wishlist");
+    $fetch_user_wishlist = mysqli_query($conn, "SELECT * FROM `wishlist_tb` WHERE `user` = '$custom_id' " ) or die("Failed to fetch user wishlist");
 
     if(mysqli_num_rows($fetch_user_wishlist) > 0){
         while($row = mysqli_fetch_assoc($fetch_user_wishlist)) {
@@ -171,8 +175,8 @@ if (!isset($name)) {
             </button> 
         
             <img class='view-cart-img me-3' src='images/" . htmlspecialchars($image) . "' alt='" . htmlspecialchars($row['product_name']) . "'> " . htmlspecialchars($row['product_name']) . "</td>";
-            echo "<td ' class='wishlist-btn'>R" . htmlspecialchars($row['product_price']) . "</td>";
-            echo "<td ' class='wishlist-btn'><button type='submit' name ='add_to_cart' class='nostyle-btn'>Add To Cart</button></td>";
+            echo "<td ' class='wishlist-btn text-center'>R" . htmlspecialchars($row['product_price']) . "</td>";
+            echo "<td ' class='wishlist-btn text-center'><button type='submit' name ='add_to_cart' class='nostyle-btn'>Add To Cart</button></td>";
             echo "</tr>";      
             echo "</Form>";      
         }

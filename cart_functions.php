@@ -1,8 +1,7 @@
 <?php
 session_start();
 include 'connection.php'; // Ensure this file has your database connection details
-
-$name = $_SESSION['user_name'] ?? null;
+$custom_id = $_SESSION['custom_id'] ?? null;
 
 // Function to redirect using JavaScript
 function js_redirect($url) {
@@ -154,7 +153,7 @@ if (isset($_POST['btn_del'])) {
 
 // Handle add to wishlist
 
-if($name == null){
+if($custom_id == null){
     echo "You need to login before adding to your wishlist";
     
     js_redirect('user_login.php');
@@ -164,7 +163,7 @@ if($name == null){
 if (isset($_POST['add_to_wishlist'])) {
 
     
-if($name == null){
+if($custom_id == null){
     echo "You need to login before adding to your wishlist";
     
     js_redirect('user_login.php');
@@ -183,7 +182,7 @@ if($name == null){
             $product_barcode = $pro['product_barcode'];
             $product_name = $pro['product_name'];
 
-            $insert_to_wishlist_tb = "INSERT INTO `wishlist_tb`( `product_barcode`, `product_name`, `product_price`, `user`) VALUES ('$product_barcode','$product_name','$price','$name')";
+            $insert_to_wishlist_tb = "INSERT INTO `wishlist_tb`( `product_barcode`, `product_name`, `product_price`, `user`) VALUES ('$product_barcode','$product_name','$price','$custom_id')";
 
             mysqli_query($conn, $insert_to_wishlist_tb);
 
