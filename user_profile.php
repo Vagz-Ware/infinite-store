@@ -19,7 +19,7 @@ if (mysqli_num_rows($fetch_user_info) > 0 ){
 if (!isset($custom_id)){
 //  js_redirect('user_login.php');
   echo "You are not logged in, Please login";
- header("refresh:2; http://localhost/dashboard/infinite%20watches/user_login.php");
+ header("refresh:2; user_login.php");
   exit; // Ensure script execution stops after redirection
 }
 

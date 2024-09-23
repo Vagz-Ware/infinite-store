@@ -1,23 +1,29 @@
 <?php
 
+
 require 'connection.php';
 
 session_start();
 
-$name = $_SESSION['user_name'] ?? null;
+$custom_id = $_SESSION['custom_id'] ?? null;
+
 $count = $_SESSION['cart_count'] ?? 0; // Retrieve the cart count from the session
 
-$fetch_user_info = mysqli_query($conn, "SELECT * FROM `users_tb` WHERE `user_fullname` = '$name'") or die("Failed to fetch user information");
+$fetch_user_info = mysqli_query($conn, "SELECT * FROM `users_tb` WHERE `user_id` = '$custom_id'") or die("Failed to fetch user information");
 
-if (mysqli_num_rows($fetch_user_info) > 0) {
+if (mysqli_num_rows($fetch_user_info) > 0 ){
   $user_info_row = mysqli_fetch_assoc($fetch_user_info);
 }
 
-if (!isset($name)) {
+
+
+if (!isset($custom_id)){
+//  js_redirect('user_login.php');
   echo "You are not logged in, Please login";
-  header("refresh:2; url=user_login.php");
+ header("refresh:2; http://localhost/dashboard/infinite%20watches/user_login.php");
   exit; // Ensure script execution stops after redirection
 }
+
 
 if (empty($_SESSION['cart']) || !isset($_SESSION['cart'])) {
     
@@ -132,7 +138,7 @@ if (empty($_SESSION['cart']) || !isset($_SESSION['cart'])) {
         <div class="container checkout-main-container">
             <div class="row">
                 <div class="col ms-5">
-                    <h3 class="text-center mb-5">Billing Details</h3>
+                    <h3 class="text-center mb-5">Delivery Details</h3>
                     <div class="checkout-form-container">
                         <form id="checkout-form" action="checkout_func.php" method="POST">
                             <div class="fname-and-lname-container">

@@ -1,7 +1,9 @@
 <?php
 
-function js_redirect($url) {
-    echo "<script type='text/javascript'>setTimeout(function(){ window.location.href = '$url'; });</script>";
+function js_redirect($url, $delay=5000) {
+
+
+    echo "<script type='text/javascript'>setTimeout(function(){ window.location.href = '$url';  }, $delay);</script>";
 }
 
 
@@ -19,6 +21,9 @@ if(isset($_POST['submit_billing_details'])){
     $user_email_address = trim($_POST['user_email_address']);
     js_redirect('order_slip.php');
     exit;
+} else {
+    echo "There was a mistake with your delivery details or Card information, please verify them then try again";
+    js_redirect('checkout.php');
 }
 
 ?>

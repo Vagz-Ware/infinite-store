@@ -155,10 +155,12 @@ if (isset($_POST['search_btn'])) {
       </a>
       <div class='card-body'>
         <h6 class='card-title text-ellipsis'>{$row['product_name']}</h6>
-        <p class='card-text'>R {$row['product_price']}</p>
+        <p class='card-text text-center'>R {$row['product_price']}</p>
 
       </div>
       <button type='submit' name ='add_to_cart' class='nostyle-btn'><i class='ri-shopping-cart-line'></i>Add To Cart</button>
+      
+      <button type='submit' name ='add_to_wishlist' class='nostyle-btn mt-3 text-center ms-2'><i class='ri-heart-line'></i>Add To Wishlist</button>
       </form>
   
   

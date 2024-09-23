@@ -177,6 +177,8 @@ $count = $_SESSION['cart_count'] ?? 0; // Retrieve the cart count from the sessi
 
       </div>
       <button type='submit' name ='add_to_cart' class='nostyle-btn text-center'><i class='ri-shopping-cart-line text-center'></i>Add To Cart</button>
+      
+      <button type='submit' name ='add_to_wishlist' class='nostyle-btn mt-3 text-center ms-2'><i class='ri-heart-line'></i>Add To Wishlist</button>
       </form>
   
   
@@ -256,6 +258,8 @@ if (mysqli_num_rows($collect_from_db) > 0) {
                         
                     </div>
                     <button type='submit' name ='add_to_cart' class='nostyle-btn on-black-bg'><i class='ri-shopping-cart-line on-black-bg'></i>Add To Cart</button>
+                    
+                    <button type='submit' name ='add_to_wishlist' class='nostyle-btn on-black-bg mt-3 text-center ms-2'><i class='ri-heart-line'></i>Add To Wishlist</button>
 
                 </form>
             </div>
