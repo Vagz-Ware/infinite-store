@@ -8,13 +8,6 @@ function js_redirect($url) {
     echo "<script type='text/javascript'>setTimeout(function(){ window.location.href = '$url'; });</script>";
 }
 
-// Check if the user is logged in
-// $name = $_SESSION['user_name'] ?? null;
-// if (!isset($name)) {
-//     echo "You are not logged in";
-//     js_redirect('index.php');
-//     exit; 
-// }
 
 // Fetch user information from the database
 // $fetch_user_info = mysqli_query($conn, "SELECT * FROM `users_tb` WHERE `user_fullname` = '$name'") or die('Query Failed');
@@ -153,13 +146,6 @@ if (isset($_POST['btn_del'])) {
 
 // Handle add to wishlist
 
-if($custom_id == null){
-    echo "You need to login before adding to your wishlist";
-    
-    js_redirect('user_login.php');
-    exit;
-}
-
 if (isset($_POST['add_to_wishlist'])) {
 
     
@@ -173,7 +159,20 @@ if($custom_id == null){
     $pid = $_POST['id'];
 
 
-        $get_from_product_tb = "SELECT * FROM `products_tb` WHERE `product_barcode` = '$pid'";
+
+        $check_wishlist_for_duplicates = "SELECT * FROM `wishlist_tb` WHERE `product_barcode` = '$pid' AND `user_id` = '$custom_id'";
+
+        $result_from_check_wish_duplicates = mysqli_query($conn, $check_wishlist_for_duplicates);
+
+        if(!$result_from_check_wish_duplicates){
+            echo"Error because: ". mysqli_error($conn);
+        };
+
+        if (mysqli_num_rows($result_from_check_wish_duplicates) >= 1){
+            echo "You have already added this item to your wishlist";
+            exit;
+        } else {
+            $get_from_product_tb = "SELECT * FROM `products_tb` WHERE `product_barcode` = '$pid'";
         $result = mysqli_query($conn, $get_from_product_tb);
         
         if ($result && $pro = mysqli_fetch_assoc($result)) {
@@ -182,12 +181,17 @@ if($custom_id == null){
             $product_barcode = $pro['product_barcode'];
             $product_name = $pro['product_name'];
 
-            $insert_to_wishlist_tb = "INSERT INTO `wishlist_tb`( `product_barcode`, `product_name`, `product_price`, `user`) VALUES ('$product_barcode','$product_name','$price','$custom_id')";
+            $insert_to_wishlist_tb = "INSERT INTO `wishlist_tb`( `product_barcode`, `product_name`, `product_price`, `user_id`) VALUES ('$product_barcode','$product_name','$price','$custom_id')";
 
             mysqli_query($conn, $insert_to_wishlist_tb);
 
         }
 
+        }
+
+
+        
+        
         
     js_redirect('index.php');
     exit;
@@ -197,7 +201,7 @@ if($custom_id == null){
         
         $pid = $_POST['id'];
         
-        $remove_from_wishlist_tb = "DELETE FROM `wishlist_tb` WHERE `product_barcode` = '$pid' AND `user` = '$name'";
+        $remove_from_wishlist_tb = "DELETE FROM `wishlist_tb` WHERE `product_barcode` = '$pid' AND `user_id` = '$custom_id'";
         mysqli_query($conn, $remove_from_wishlist_tb);
         
     js_redirect('user_wishlist.php');

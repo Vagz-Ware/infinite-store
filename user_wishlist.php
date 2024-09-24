@@ -18,7 +18,7 @@ if (mysqli_num_rows($fetch_user_info) > 0 ){
 if (!isset($custom_id)){
 //  js_redirect('user_login.php');
   echo "You are not logged in, Please login";
- header("refresh:2; http://localhost/dashboard/infinite%20watches/user_login.php");
+ header("refresh:2;user_login.php");
   exit; // Ensure script execution stops after redirection
 }
 
@@ -151,7 +151,7 @@ if (!isset($custom_id)){
   </thead>
   <tbody>
   <?php 
-    $fetch_user_wishlist = mysqli_query($conn, "SELECT * FROM `wishlist_tb` WHERE `user` = '$custom_id' " ) or die("Failed to fetch user wishlist");
+    $fetch_user_wishlist = mysqli_query($conn, "SELECT * FROM `wishlist_tb` WHERE `user_id` = '$custom_id' " ) or die("Failed to fetch user wishlist");
 
     if(mysqli_num_rows($fetch_user_wishlist) > 0){
         while($row = mysqli_fetch_assoc($fetch_user_wishlist)) {
